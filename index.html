@@ -1,49 +1,515 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NEXULINK | AI-NATIVE WMS</title>
-<meta name="description" content="NEXULINK is an AI-native Warehouse Management System built for modern supply chains.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<title>NexuLink — Digitale Spedition China–Europa aus Hamburg</title>
+<meta name="description" content="NexuLink Cargo Desk: Palettenversand in Europa für chinesische Cross-Border-Händler. Sofortpreise, eine Rechnung, Sendungsverfolgung. Shield Information Technologies GmbH, Hamburg.">
+<!-- 官网 v8 · 2026-10-29 · 上线版，全文替换 v7。v8 变更：栏头 logo 换真图——mark 单件（nexulink-mark.png，显示 32px）＋字标版（nexulink-wordmark.png，i 带红点，显示 22px），两图与 index.html 同目录；占位 SVG 与「AI-NATIVE LOGISTICS」小字撤（副标属登录页专用 logo，公司脸不带）。v7 变更：v7 变更：①不再从谷歌拉字体，全用系统字（Inter 若本机有则用；德英首屏标题 Archivo 撤，改系统粗体）；②联系邮箱两处改 info@shieldmedia.de（10-29 08:40 拍）；③页脚 AGB 撤，Impressum／Datenschutz 改为本页锚点段，内容见页底（Datenschutz 为草稿、待法务核）；④微信二维码框撤，等图到了加回；⑤加 meta description。结构与文案其余照 v6（10-29 08:22 结构定稿）。 -->
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Inter,sans-serif;background:#fff;color:#111}
-header{display:flex;justify-content:space-between;align-items:center;padding:24px 8%;border-bottom:1px solid #eee}
-.logo{font-weight:800;font-size:28px;letter-spacing:.04em}
-.badge{background:#e02020;color:#fff;padding:10px 18px;border-radius:10px;font-weight:700}
-.hero{max-width:1440px;margin:40px auto;padding:0 5%}
-.hero img{width:100%;border-radius:18px;box-shadow:0 20px 60px rgba(0,0,0,.12)}
-.content{max-width:900px;margin:60px auto;text-align:center;padding:0 20px}
-.content h1{font-size:48px;margin-bottom:16px}
-.content p{font-size:20px;color:#555;line-height:1.7}
-footer{margin:80px 0 30px;text-align:center;color:#777;font-size:14px}
-@media(max-width:768px){
-.logo{font-size:22px}
-.content h1{font-size:34px}
-.content p{font-size:18px}
-}
+  :root{
+    --paper:#F7F5F2; --panel:#FFFFFF; --ink:#25282A; --grey:#7B7E83;
+    --hairline:#E9E6E1; --red:#C8102E; --red-surface:#BE2039; --maxw:1160px; --fill:#EFEDE9;
+    --sans:"Inter","Segoe UI","Helvetica Neue",Arial,"PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.65;font-size:15px;
+  }
+  a{color:inherit;text-decoration:none}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--red);outline-offset:3px;border-radius:2px}
+  button{font:inherit;cursor:pointer}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  [data-i18n]{}
+
+  /* ── Kopf ─────────────────────────────── */
+  header{border-bottom:1px solid var(--hairline);background:var(--paper);position:sticky;top:0;z-index:50}
+  .bar{display:flex;align-items:center;justify-content:space-between;height:74px;gap:20px}
+  .mark{display:flex;align-items:center;gap:12px}
+  .mark img{display:block;height:auto}
+  .bar-right{display:flex;align-items:center;gap:14px}
+  .lang{display:flex;gap:2px;border:1px solid var(--hairline);border-radius:999px;padding:3px;background:var(--panel)}
+  .lang button{font-size:13px;padding:5px 13px;border-radius:999px;color:var(--grey);border:none;background:transparent}
+  .lang button[aria-pressed="true"]{background:var(--ink);color:#fff}
+  /* 登录分流下拉 */
+  .login{position:relative}
+  .login > button{
+    display:flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;
+    padding:10px 18px;border:1.5px solid var(--ink);border-radius:6px;background:var(--panel);
+  }
+  .login > button::after{content:"";width:7px;height:7px;border-right:1.6px solid var(--ink);border-bottom:1.6px solid var(--ink);transform:rotate(45deg) translateY(-2px)}
+  .login-menu{
+    position:absolute;right:0;top:calc(100% + 8px);width:280px;background:var(--panel);
+    border:1px solid var(--hairline);border-radius:8px;box-shadow:0 10px 28px rgba(31,35,41,.16);
+    padding:8px;display:none;
+  }
+  .login[data-open="true"] .login-menu{display:block}
+  .login-menu a{display:block;padding:12px 14px;border-radius:6px}
+  .login-menu a:hover{background:#F0EDE9}
+  .login-menu .name{font-weight:600;font-size:14.5px}
+  .login-menu .sub{font-size:12.5px;color:var(--grey);margin-top:2px}
+  .cta-mini{
+    display:none;font-size:14.5px;font-weight:650;padding:11px 20px;border-radius:6px;
+    background:var(--red);color:#fff;border:1.5px solid var(--red);
+  }
+  body[data-lang="zh"] .cta-mini{display:inline-block}
+
+  /* ── Held（伙伴脸）────────────────────── */
+  .hero{padding:88px 0 0}
+  .hero h1{
+    font-family:var(--sans);font-weight:800;
+    font-size:clamp(38px,4.8vw,58px);line-height:1.06;letter-spacing:-.02em;max-width:16ch;
+  }
+  body[data-lang="zh"] .hero h1{font-weight:700;letter-spacing:.01em;line-height:1.2;font-size:clamp(32px,4.2vw,48px)}
+  .hero p.lede{margin-top:26px;max-width:58ch;font-size:17px}
+  .hero p.second{display:none;margin-top:10px;max-width:58ch;font-size:14px;color:var(--grey)}
+  body[data-lang="zh"] .hero p.second{display:block}
+  /* 客户脸专属：主行动区 */
+  .hero-cta{display:none;margin-top:36px;gap:14px}
+  body[data-lang="zh"] .hero-cta{display:flex;flex-wrap:wrap}
+  .btn-primary{background:var(--red);color:#fff;border:1.5px solid var(--red);font-weight:600;font-size:15px;padding:13px 26px;border-radius:6px}
+  .btn-primary:hover{background:#A50D26;border-color:#A50D26}
+  .btn-ghost{border:1.5px solid var(--ink);color:var(--ink);font-weight:600;font-size:15px;padding:13px 24px;border-radius:6px;background:transparent}
+  .btn-ghost:hover{background:var(--ink);color:#fff}
+
+  /* 分轨线 */
+  .junction{position:relative;height:140px;margin-top:14px}
+  .junction svg{position:absolute;inset:0;width:100%;height:100%}
+  .junction path,.junction line{stroke:var(--red);stroke-width:2.5;fill:none;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 1.1s cubic-bezier(.6,0,.2,1) .15s forwards}
+  .junction circle{fill:var(--red);opacity:0;animation:dot .3s ease 1.05s forwards}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @keyframes dot{to{opacity:1}}
+  @media (prefers-reduced-motion:reduce){
+    .junction path,.junction line{animation:none;stroke-dashoffset:0}
+    .junction circle{animation:none;opacity:1}
+    html{scroll-behavior:auto}
+  }
+
+  /* ── 双轨产品 ─────────────────────────── */
+  .tracks{display:grid;grid-template-columns:1.45fr 1fr;border:1px solid var(--hairline);background:var(--panel)}
+  .track{padding:52px 46px 48px;display:flex;flex-direction:column;min-height:430px}
+  .track + .track{border-left:1px solid var(--hairline)}
+  .track h2{font-weight:700;font-size:26px;letter-spacing:-.01em}
+  .track .role{margin-top:6px;color:var(--grey);font-size:14px}
+  .track p.desc{margin-top:24px;max-width:44ch}
+  .track ul{margin:24px 0 0;list-style:none}
+  .track li{padding:10px 0;border-top:1px solid var(--hairline);font-size:14.5px;display:flex;gap:12px}
+  .track li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--red);margin-top:7px;flex:none}
+  .track .foot{margin-top:auto;padding-top:30px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .status{font-size:13px;padding:6px 14px;border-radius:999px;border:1px solid var(--hairline);color:var(--grey)}
+  .cta{display:inline-block;font-size:14.5px;font-weight:600;padding:12px 24px;border-radius:6px;border:1.5px solid var(--ink);color:var(--ink);background:transparent;transition:background .15s,color .15s}
+  .cta:hover{background:var(--ink);color:#fff}
+  .track--cargo{background:var(--red-surface);color:#fff}
+  .track--cargo .role,.track--cargo .status{color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.35)}
+  .track--cargo li{border-top-color:rgba(255,255,255,.28)}
+  .track--cargo li::before{background:#fff}
+  .track--cargo .cta{border-color:#fff;color:var(--red-surface);background:#fff}
+  .track--cargo .cta:hover{background:transparent;color:#fff}
+  .track--dir .foot .status{border-color:var(--red);color:var(--red)}
+
+  /* ── 基座三条 ─────────────────────────── */
+  .base{padding:68px 0 80px}
+  .base .row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:44px;border-top:1px solid var(--hairline);padding-top:42px}
+  .base h3{font-size:15px;font-weight:600}
+  .base p{margin-top:8px;font-size:14px;color:var(--grey);max-width:36ch}
+
+  /* ── 申请测试账号（中文脸专属）───────── */
+  .signup{display:none;background:var(--ink);color:#fff;padding:72px 0}
+  body[data-lang="zh"] .signup{display:block}
+  .signup h2{font-size:24px;font-weight:700}
+  .signup p.note{margin-top:10px;color:#B9BCC0;max-width:52ch;font-size:14.5px}
+  .signup .contact{margin-top:34px}
+  .signup .lines{font-size:15px;line-height:2}
+  .signup .lines a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+  .signup .lines small{display:block;color:#B9BCC0;font-size:13.5px;line-height:1.6;margin-top:6px;max-width:48ch}
+
+  /* ── 中文脸专属：六节点流程图 ─────────── */
+  .flow{display:none;padding:64px 0 8px}
+  body[data-lang="zh"] .flow{display:block}
+  .flow h2{font-size:24px;font-weight:700}
+  .flow p.note{margin-top:8px;color:var(--grey);font-size:14.5px;max-width:56ch}
+  .flow .art{margin-top:28px;background:var(--panel);border:1px solid var(--hairline);border-radius:8px;padding:20px 20px 8px}
+  .flow svg{display:block;width:100%;height:auto;color:var(--ink)}
+
+  /* ── 中文脸专属：三卖点图标行 ─────────── */
+  .sell{display:none;padding:40px 0 8px}
+  body[data-lang="zh"] .sell{display:block;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+  .sell .item{background:var(--panel);border:1px solid var(--hairline);border-radius:8px;padding:26px 24px 22px}
+  .sell svg{display:block;width:56px;height:56px;color:var(--ink)}
+  .sell h3{margin-top:16px;font-size:16px;font-weight:600}
+  .sell p{margin-top:6px;color:var(--grey);font-size:14px;line-height:1.65}
+
+  /* ── 中文脸专属：怎么开始 ─────────────── */
+  .start{display:none;padding:56px 0 8px}
+  body[data-lang="zh"] .start{display:block}
+  .start h2{font-size:24px;font-weight:700}
+  .start ol{list-style:none;margin-top:26px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;position:relative}
+  .start ol::before{content:"";position:absolute;left:28px;right:28px;top:19px;border-top:1.5px dashed var(--grey)}
+  .start li{position:relative;padding:0 28px 0 0}
+  .start .n{position:relative;z-index:1;width:40px;height:40px;border-radius:50%;background:var(--panel);border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px}
+  .start li:last-child .n{background:var(--red);border-color:var(--red);color:#fff}
+  .start h3{margin-top:14px;font-size:16px;font-weight:600}
+  .start p{margin-top:6px;color:var(--grey);font-size:14px;line-height:1.65;max-width:30ch}
+
+  /* ── 法定段（三语同显德文）────────────── */
+  .legal{padding:56px 0 8px;font-size:13.5px;color:var(--grey);border-top:1px solid var(--hairline)}
+  .legal section{scroll-margin-top:96px;max-width:72ch}
+  .legal section + section{margin-top:44px}
+  .legal h2{font-size:17px;font-weight:700;color:var(--ink)}
+  .legal h3{font-size:14px;font-weight:600;color:var(--ink);margin-top:18px}
+  .legal p{margin-top:8px;line-height:1.7}
+  .legal a{text-decoration:underline;text-underline-offset:3px}
+  .legal .stand{margin-top:16px;font-size:12.5px;color:#9A9DA2}
+
+  @media (max-width:900px){
+    body[data-lang="zh"] .sell{grid-template-columns:1fr}
+    .start ol{grid-template-columns:1fr;gap:22px}
+    .start ol::before{display:none}
+  }
+
+  /* ── Fuß ──────────────────────────────── */
+  footer{background:#1C1F21;color:#B9BCC0;padding:52px 0 60px;font-size:13.5px}
+  footer .cols{display:grid;grid-template-columns:2fr 1fr 1fr;gap:44px}
+  footer strong{color:#fff;font-weight:600;display:block;margin-bottom:12px;font-size:14.5px}
+  footer p{line-height:1.8}
+  footer a:hover{color:#fff}
+  footer .fine{margin-top:40px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:#8A8E93}
+
+  @media (max-width:900px){
+    .tracks{grid-template-columns:1fr}
+    .track + .track{border-left:none;border-top:1px solid var(--hairline)}
+    .base .row{grid-template-columns:1fr}
+    footer .cols{grid-template-columns:1fr}
+    .junction{height:100px}
+  }
 </style>
 </head>
-<body>
+<body data-lang="de">
+
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<g id="pallet"><rect x="0" y="0" width="120" height="7" rx="1.5" fill="var(--fill)"/><rect x="6" y="7" width="16" height="10" rx="1"/><rect x="52" y="7" width="16" height="10" rx="1"/><rect x="98" y="7" width="16" height="10" rx="1"/><line x1="0" y1="20" x2="120" y2="20"/></g>
+<g id="cargo"><rect x="0" y="30" width="76" height="26" rx="2" fill="var(--fill)"/><rect x="14" y="4" width="48" height="26" rx="2" fill="var(--fill)"/><line x1="38" y1="4" x2="38" y2="30"/><line x1="24" y1="0" x2="24" y2="56"/><line x1="52" y1="0" x2="52" y2="56"/></g>
+<g id="cab"><path d="M3 0 h30 a4 4 0 0 1 4 4 v26 h-38 a3 3 0 0 1 -3 -3 v-10 l7 -17 z" fill="var(--fill)"/><rect x="9" y="6" width="20" height="10" rx="1.5" fill="var(--panel)"/><circle cx="12" cy="32" r="6" fill="var(--panel)"/><circle cx="30" cy="32" r="6" fill="var(--panel)"/></g>
+<g id="depot" stroke="var(--grey)" stroke-width="1.5"><polyline points="0,16 32,0 64,16"/><line x1="4" y1="16" x2="4" y2="44"/><line x1="60" y1="16" x2="60" y2="44"/><line x1="4" y1="44" x2="60" y2="44"/><rect x="22" y="24" width="20" height="20" fill="var(--fill)"/></g>
+</defs></svg>
+
+<header>
+  <div class="wrap bar">
+    <a class="mark" href="#" aria-label="NexuLink">
+      <img src="nexulink-mark.png" width="31" height="32" alt="">
+      <img src="nexulink-wordmark.png" width="142" height="22" alt="NexuLink">
+    </a>
+    <div class="bar-right">
+      <nav class="lang" aria-label="Sprache / Language / 语言">
+        <button data-setlang="de" aria-pressed="true">DE</button>
+        <button data-setlang="en" aria-pressed="false">EN</button>
+        <button data-setlang="zh" aria-pressed="false">中文</button>
+      </nav>
+      <a class="cta-mini" href="#signup">注册 / 申请试价</a>
+      <div class="login" id="login">
+        <button aria-haspopup="menu" data-i18n="login">Anmelden</button>
+        <div class="login-menu" role="menu">
+          <a href="https://cargo.nexulink.de" role="menuitem">
+            <span class="name">NexuLink Cargo Desk</span>
+            <span class="sub" data-i18n="login_cargo">Kundenportal — Spedition</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <h1 data-i18n="h1">Ihr Zugang zum<br>China–Europa-Handel.</h1>
+    <p class="lede" data-i18n="lede">NexuLink ist die digitale Speditionsplattform der Shield Information Technologies GmbH, Hamburg:
+    Vertrieb, Kundenbetreuung und Organisation in China — Abwicklung und Compliance in Deutschland — und ein eigenes System,
+    das das Sendungsvolumen strukturiert an die Schnittstellen unserer Partner übergibt.</p>
+    <p class="second" data-i18n="second">Für Frachtführer und Logistikpartner in Europa, die den chinesischen Cross-Border-Markt als organisierte Kundengruppe erreichen wollen.</p>
+    <div class="hero-cta">
+      <a class="btn-primary" href="#signup">申请测试账号</a>
+      <a class="btn-ghost" href="#flow">看看怎么发货</a>
+    </div>
+  </section>
+
+  <div class="junction wrap" aria-hidden="true">
+    <svg viewBox="0 0 1160 140" preserveAspectRatio="none">
+      <line x1="580" y1="0" x2="580" y2="48"/>
+      <path d="M 580 48 C 580 90, 290 90, 290 140"/>
+      <path d="M 580 48 C 580 90, 870 90, 870 140"/>
+      <circle cx="580" cy="48" r="5"/>
+    </svg>
+  </div>
+
+  <section class="wrap tracks" id="produkte">
+    <article class="track track--cargo">
+      <h2>NexuLink Cargo Desk</h2>
+      <p class="role" data-i18n="cd_role">Digitale Spedition China–Europa</p>
+      <p class="desc" data-i18n="cd_desc">Palettenversand in Europa buchen wie ein Paket: Sofortpreise
+      über angebundene Frachtführer, transparente Servicegebühren und ein chinesischsprachiges
+      Operations-Cockpit für grenzüberschreitende Händler.</p>
+      <ul>
+        <li data-i18n="cd_li1">Sofortangebot statt tagelanger Preisanfragen</li>
+        <li data-i18n="cd_li2">Ein Vertragspartner, eine Rechnung</li>
+        <li data-i18n="cd_li3">Sendungsverfolgung und Belege an einem Ort</li>
+      </ul>
+      <div class="foot">
+        <span class="status" data-i18n="cd_status">Start 2026 — Testphase</span>
+        <a class="cta" href="#signup" data-i18n="cd_cta">Testkunde werden</a>
+      </div>
+    </article>
+
+    <article class="track track--dir">
+      <h2 data-i18n="dir_h2">Partnerschaft</h2>
+      <p class="role" data-i18n="dir_role">Für Frachtführer und Logistikpartner</p>
+      <p class="desc" data-i18n="dir_desc">Wir bringen chinesische Cross-Border-Händler und Spediteure als organisierte
+      Kundengruppe nach Europa: Akquise und Betreuung auf Chinesisch, Auftragsdaten strukturiert per API,
+      ein Ansprechpartner in Hamburg.</p>
+      <ul>
+        <li data-i18n="dir_li1">Kundengewinnung und Betreuung in China</li>
+        <li data-i18n="dir_li2">Strukturierte Auftragsdaten per API</li>
+        <li data-i18n="dir_li3">Abrechnung und Haftung über eine deutsche GmbH</li>
+      </ul>
+      <div class="foot">
+        <span class="status" data-i18n="dir_status">Partner werden</span>
+        <a class="cta" href="#kontakt" data-i18n="dir_cta">Kontakt aufnehmen</a>
+      </div>
+    </article>
+  </section>
 
 
-<section class="hero">
-<img src="hero.png" alt="NEXULINK AI-NATIVE WMS">
-</section>
+  <!-- 中文脸专属：六节点流程图（插画核心十张 v0.2 第 10 张） -->
+  <section class="flow wrap" id="flow">
+    <h2>您的货会经过这六步</h2>
+    <p class="note">每一步到了我们都会告诉您；哪一步卡住了，也告诉您为什么。</p>
+    <div class="art">
+      <svg viewBox="0 0 1160 200" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-label="六个关键节点">
+  <path d="M60 150 H1060" stroke="var(--grey)" stroke-width="1.5" stroke-dasharray="6 6"/>
+  <circle cx="60" cy="150" r="5" fill="var(--panel)"/><circle cx="260" cy="150" r="5" fill="var(--panel)"/><circle cx="460" cy="150" r="5" fill="var(--panel)"/><circle cx="660" cy="150" r="5" fill="var(--panel)"/><circle cx="860" cy="150" r="5" fill="var(--panel)"/>
+  <circle cx="1060" cy="150" r="6" fill="var(--red)" stroke="none"/>
+  <use xlink:href="#cab" x="16" y="92"/>
+  <g transform="translate(64 86) scale(.6)"><use xlink:href="#cargo" x="22" y="0"/><use xlink:href="#pallet" x="0" y="56"/></g>
+  <text x="60" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor" stroke="none">安排提货</text>
+  <use xlink:href="#depot" x="228" y="74"/>
+  <text x="260" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor" stroke="none">始发配送中心</text>
+  <g transform="translate(398 78)"><rect x="0" y="16" width="76" height="36" rx="3" fill="var(--fill)"/><use xlink:href="#cab" x="80" y="22"/><circle cx="16" cy="54" r="5" fill="var(--panel)"/><circle cx="60" cy="54" r="5" fill="var(--panel)"/><line x1="-22" y1="28" x2="-8" y2="28" stroke="var(--grey)" stroke-width="1.5"/><line x1="-18" y1="40" x2="-8" y2="40" stroke="var(--grey)" stroke-width="1.5"/></g>
+  <text x="460" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor" stroke="none">干线运输</text>
+  <use xlink:href="#depot" x="628" y="74"/>
+  <text x="660" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor" stroke="none">目的地配送中心</text>
+  <g transform="translate(826 80)"><rect x="0" y="16" width="44" height="34" rx="3" fill="var(--fill)"/><path d="M44 22 h18 a3 3 0 0 1 3 3 v25 h-21 z" fill="var(--fill)"/><rect x="48" y="26" width="12" height="8" rx="1" fill="var(--panel)"/><circle cx="12" cy="52" r="5" fill="var(--panel)"/><circle cx="54" cy="52" r="5" fill="var(--panel)"/></g>
+  <text x="860" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor" stroke="none">末端配送</text>
+  <g transform="translate(1032 62)"><path d="M0 4 h38 l14 14 v56 a3 3 0 0 1 -3 3 h-49 a3 3 0 0 1 -3 -3 v-67 a3 3 0 0 1 3 -3 z" fill="var(--fill)"/><path d="M38 4 v14 h14"/><line x1="12" y1="34" x2="40" y2="34" stroke="var(--grey)" stroke-width="1.5"/><line x1="12" y1="46" x2="44" y2="46" stroke="var(--grey)" stroke-width="1.5"/><path d="M14 62 l8 8 l16 -16"/></g>
+  <text x="1060" y="186" text-anchor="middle" font-size="13" font-weight="600" fill="currentColor" stroke="none">卸货签收 POD</text>
+</svg>
+    </div>
+  </section>
 
-<section class="content">
-<h1>AI‑Native Warehouse Management System</h1>
-<p>
-NEXULINK is building the next generation warehouse operating system with AI‑native
-automation, real‑time visibility and enterprise‑grade scalability.
-</p>
-</section>
+  <!-- 中文脸专属：三卖点图标行（文案只写现役已有的事，不写待建功能） -->
+  <section class="sell wrap" aria-label="卖点">
+    <div class="item"><svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="28" cy="28" r="19"/><path d="M28 16 v12 l8 5"/><circle cx="43" cy="13" r="4" fill="var(--red)" stroke="none"/></svg><h3>当场出价</h3><p>在线询价，价格立刻出来；不用发邮件等报价单。</p></div>
+    <div class="item"><svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 8 h22 l8 8 v32 h-30 z" fill="var(--fill)"/><path d="M36 8 v8 h8"/><line x1="20" y1="24" x2="36" y2="24" stroke="var(--grey)" stroke-width="1.5"/><line x1="20" y1="31" x2="36" y2="31" stroke="var(--grey)" stroke-width="1.5"/><line x1="20" y1="38" x2="30" y2="38" stroke="var(--grey)" stroke-width="1.5"/><circle cx="40" cy="40" r="4" fill="var(--red)" stroke="none"/></svg><h3>费用条条透明</h3><p>运费和每一项服务费分开列，下单前看得清，账单上对得上。</p></div>
+    <div class="item"><svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 42 C 20 42, 24 30, 32 30 S 42 18, 46 14" stroke="var(--grey)" stroke-width="1.5" stroke-dasharray="4 4"/><rect x="6" y="30" width="16" height="12" rx="1.5" fill="var(--fill)"/><line x1="14" y1="30" x2="14" y2="42"/><line x1="4" y1="46" x2="24" y2="46"/><circle cx="46" cy="14" r="4" fill="var(--red)" stroke="none"/></svg><h3>轨迹与单据一处看全</h3><p>每张单的运输节点、标签、运单和签收凭证，都在订单详情里。</p></div>
+  </section>
 
-<footer>
-© 2026 NEXULINK. All rights reserved.
+  <!-- 中文脸专属：怎么开始（测试期邀请制） -->
+  <section class="start wrap" aria-label="怎么开始">
+    <h2>怎么开始</h2>
+    <ol>
+      <li><div class="n">1</div><h3>联系我们</h3><p>发一封邮件到 info@shieldmedia.de，说一句您常发的线路。</p></li>
+      <li><div class="n">2</div><h3>开通账号</h3><p>测试期邀请制，我们一个工作日内为您开通，并发来登录方式。</p></li>
+      <li><div class="n">3</div><h3>询价、充值、下单</h3><p>登录后中文界面三步下单，之后的每一步进展我们主动告诉您。</p></li>
+    </ol>
+  </section>
+
+  <section class="base wrap">
+    <div class="row">
+      <div>
+        <h3 data-i18n="b1h">Vertrieb und Organisation in China</h3>
+        <p data-i18n="b1p">Chinesischsprachiges Team, Kundengruppe auf Einladung, Marketing vor Ort —
+        das Volumen kommt organisiert, nicht als Einzelanfragen.</p>
+      </div>
+      <div>
+        <h3 data-i18n="b2h">AI-nativ von Anfang an</h3>
+        <p data-i18n="b2p">Jeder Vorgang wird strukturiert erfasst. Was heute ein Mensch bearbeitet,
+        lernt das System für morgen — mit dem Menschen in der Verantwortung.</p>
+      </div>
+      <div>
+        <h3 data-i18n="b3h">Gebaut in Hamburg</h3>
+        <p data-i18n="b3p">Deutsche Gesellschaft, deutsche Verträge, europäische Infrastruktur —
+        und ein Team, das beide Märkte aus eigener Praxis kennt.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 中文脸专属：申请测试账号（无发信底座、不为官网开后端；邮箱直联。微信二维码：图到了在 .contact 里加 <img src="wechat-qr.png" width="168" height="168" alt="微信二维码"> 即可。自助注册开闸后此处换真注册入口） -->
+  <section class="signup" id="signup">
+    <div class="wrap">
+      <h2>申请测试账号</h2>
+      <p class="note">测试期采用邀请制。发邮件告诉我们您常发的线路，我们一个工作日内与您联系开通账号。</p>
+      <div class="contact">
+        <div class="lines">
+          邮箱：<a href="mailto:info@shieldmedia.de">info@shieldmedia.de</a><br>
+          微信：邮件索取微信号，备注「卡派」
+          <small>测试期邀请制：我们一个工作日内与您联系开通账号；开通后即可在线询价、充值、下单。</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 法定段：三语同显德文原文（法定页不翻译）。Datenschutz 为 10-29 草稿、待法务核；改动需 AlexKun 一字 -->
+  <div class="legal wrap">
+    <section id="impressum">
+      <h2>Impressum</h2>
+      <h3>Angaben gemäß § 5 DDG</h3>
+      <p>Shield Information Technologies GmbH<br>Oberstraße 134<br>20149 Hamburg<br>Deutschland</p>
+      <h3>Vertreten durch</h3>
+      <p>Geschäftsführerin: Meimei Sun</p>
+      <h3>Kontakt</h3>
+      <p>E-Mail: <a href="mailto:info@shieldmedia.de">info@shieldmedia.de</a></p>
+      <h3>Registereintrag</h3>
+      <p>Eintragung im Handelsregister.<br>Registergericht: Amtsgericht Hamburg<br>Registernummer: HRB 134235</p>
+      <h3>Umsatzsteuer-ID</h3>
+      <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: DE300144806</p>
+      <h3>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h3>
+      <p>Meimei Sun, Anschrift wie oben.</p>
+    </section>
+
+    <section id="datenschutz">
+      <h2>Datenschutzerklärung</h2>
+      <h3>1. Verantwortlicher</h3>
+      <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist die Shield Information Technologies GmbH, Oberstraße 134, 20149 Hamburg, E-Mail: <a href="mailto:info@shieldmedia.de">info@shieldmedia.de</a>.</p>
+      <h3>2. Hosting und Server-Logfiles</h3>
+      <p>Diese Website ist eine statische Internetseite und wird bei Vercel Inc., USA, gehostet. Beim Aufruf werden technisch notwendige Zugriffsdaten (IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Browsertyp) in Server-Logfiles verarbeitet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an einem sicheren und stabilen Betrieb der Website). Die Verarbeitung durch den Hostinganbieter erfolgt auf Grundlage eines Auftragsverarbeitungsvertrags unter Einbeziehung der EU-Standardvertragsklauseln.</p>
+      <h3>3. Keine Cookies, kein Tracking</h3>
+      <p>Diese Website setzt keine Cookies, verwendet keine Analyse- oder Tracking-Dienste und bindet keine externen Schriften oder Skripte ein. Die Sprachauswahl wird nicht gespeichert.</p>
+      <h3>4. Kontaktaufnahme per E-Mail</h3>
+      <p>Wenn Sie uns per E-Mail kontaktieren, verarbeiten wir Ihre Angaben zur Bearbeitung der Anfrage (Art. 6 Abs. 1 lit. b DSGVO, bei sonstigen Anfragen lit. f DSGVO). Die Daten werden gelöscht, sobald sie für die Bearbeitung nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.</p>
+      <h3>5. Kundenportal</h3>
+      <p>Das Kundenportal NexuLink Cargo Desk (cargo.nexulink.de) ist ein eigenständiges System mit eigener Datenschutzerklärung, die Ihnen dort zur Verfügung gestellt wird.</p>
+      <h3>6. Ihre Rechte</h3>
+      <p>Sie haben das Recht auf Auskunft (Art. 15 DSGVO), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung der Verarbeitung (Art. 18), Datenübertragbarkeit (Art. 20) sowie Widerspruch (Art. 21 DSGVO). Wenden Sie sich dazu an die oben genannte E-Mail-Adresse. Sie haben außerdem das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren; für uns zuständig ist der Hamburgische Beauftragte für Datenschutz und Informationsfreiheit.</p>
+      <p class="stand">Stand: 29. Oktober 2026</p>
+    </section>
+  </div>
+</main>
+
+<footer id="kontakt">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <strong>Shield Information Technologies GmbH</strong>
+        <p>Oberstraße 134<br>20149 Hamburg, Deutschland<br>
+        Handelsregister: Amtsgericht Hamburg, HRB 134235</p>
+      </div>
+      <div>
+        <strong data-i18n="f_contact">Kontakt</strong>
+        <p><a href="mailto:info@shieldmedia.de">info@shieldmedia.de</a><br>
+        <span data-i18n="f_wechat">微信 / WeChat auf Anfrage</span></p>
+      </div>
+      <div>
+        <strong data-i18n="f_legal">Rechtliches</strong>
+        <p><a href="#impressum">Impressum</a><br><a href="#datenschutz" data-i18n="f_privacy">Datenschutz</a></p>
+      </div>
+    </div>
+    <div class="fine">
+      <span>© 2026 Shield Information Technologies GmbH</span>
+      <span data-i18n="f_family">NexuLink ist eine Produktfamilie der Shield Information Technologies GmbH.</span>
+    </div>
+  </div>
 </footer>
+
+<script>
+/* 三语两脸：de/en 共享"伙伴名片"文案结构（互为翻译）；zh 是"客户获客"脸——
+   版式差异由 body[data-lang] 的 CSS 承担，文字由本字典承担。法定段三语同显德文，不进字典。 */
+const T = {
+  de: {}, /* 基线即 DE，写在 HTML 里 */
+  en: {
+    login:"Log in", login_cargo:"Customer portal — freight",
+    h1:"Your access to<br>China–Europe trade.",
+    lede:"NexuLink is the digital freight platform of Shield Information Technologies GmbH, Hamburg: sales, customer care and organisation in China — operations and compliance in Germany — and our own system that hands shipment volume to our partners' interfaces in structured form.",
+    second:"For carriers and logistics partners in Europe who want to reach the Chinese cross-border market as an organised customer base.",
+    dir_h2:"Partnership",
+    dir_role:"For carriers and logistics partners",
+    dir_desc:"We bring Chinese cross-border merchants and forwarders to Europe as an organised customer base: acquisition and care in Chinese, order data structured via API, one contact in Hamburg.",
+    dir_li1:"Customer acquisition and care in China",
+    dir_li2:"Structured order data via API",
+    dir_li3:"Billing and liability through a German GmbH",
+    dir_status:"Become a partner", dir_cta:"Get in touch",
+    cd_role:"Digital freight China–Europe",
+    cd_desc:"Book pallet freight in Europe like a parcel: instant prices via connected carriers, transparent service fees, and a Chinese-language operations cockpit for cross-border merchants.",
+    cd_li1:"Instant quotes instead of days of price requests",
+    cd_li2:"One contracting party, one invoice",
+    cd_li3:"Tracking and documents in one place",
+    cd_status:"Launching 2026 — test phase", cd_cta:"Become a test customer",
+    b1h:"Sales and organisation in China",
+    b1p:"Chinese-speaking team, invitation-only customer base, marketing on the ground — volume arrives organised, not as scattered enquiries.",
+    b2h:"AI-native from day one",
+    b2p:"Every operation is captured in structured form. What a person handles today, the system learns for tomorrow — with humans staying accountable.",
+    b3h:"Built in Hamburg",
+    b3p:"German company, German contracts, European infrastructure — and a team that knows both markets from its own practice.",
+    f_contact:"Contact", f_wechat:"WeChat on request", f_legal:"Legal", f_privacy:"Privacy",
+    f_family:"NexuLink is a product family of Shield Information Technologies GmbH."
+  },
+  zh: {
+    login:"登录", login_cargo:"客户门户 — 卡航专线",
+    h1:"把欧洲运力数字化，<br>交给中国卖家用。",
+    lede:"NexuLink 卡派——德国本地团队运营，中文界面在线询价、下单、跟踪，欧洲干线与本地配送一站直达。",
+    second:"服务中国跨境卖家和货代；海外仓与前店后仓合作伙伴同样欢迎接入。",
+    dir_h2:"下一步：AI 原生",
+    dir_role:"方向，不是承诺",
+    dir_desc:"卡派里每一次询价、下单、异常处理都结构化留档。今天人做的事，系统明天学会——这是我们往物流 AI Agent 走的底料。",
+    dir_li1:"每次操作结构化留档",
+    dir_li2:"异常先由系统判，人兜底",
+    dir_li3:"同一套系统，每周迭代",
+    dir_status:"进行中", dir_cta:"看看怎么发货",
+    cd_role:"中欧数字卡航平台",
+    cd_desc:"在线询价当场出价，不用等报价单；一个合同方一张发票；轨迹、凭证、对账单一页看全。中文下单，欧洲直达。",
+    cd_li1:"当场出价，告别等报价",
+    cd_li2:"运费与服务费分开列，账单对得上",
+    cd_li3:"轨迹、单据、签收凭证一处看全",
+    cd_status:"2026 测试期 · 邀请制", cd_cta:"申请测试账号",
+    b1h:"德国本地运营",
+    b1p:"汉堡主体、本地团队、本地合规；中文沟通，中国节奏响应。",
+    b2h:"生而 AI 原生",
+    b2p:"每一次操作都结构化留档。今天人做的事，系统明天学会——责任始终在人。",
+    b3h:"汉堡建造",
+    b3p:"德国公司、德国合同、欧洲基础设施——一支两个市场都亲手做过的团队。",
+    f_contact:"联系方式", f_wechat:"微信号请邮件索取", f_legal:"法律信息", f_privacy:"隐私政策",
+    f_family:"NexuLink 是 Shield Information Technologies GmbH 旗下产品家族。"
+  }
+};
+const DE = {};
+document.querySelectorAll('[data-i18n]').forEach(el => DE[el.dataset.i18n] = el.innerHTML);
+T.de = DE;
+
+function setLang(lang){
+  document.body.dataset.lang = lang;
+  document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
+  const dict = T[lang] || T.de;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.dataset.i18n;
+    if (dict[k] !== undefined) el.innerHTML = dict[k];
+  });
+  document.querySelectorAll('.lang button').forEach(b =>
+    b.setAttribute('aria-pressed', String(b.dataset.setlang === lang)));
+  const dirCta = document.querySelector('.track--dir .cta'); if (dirCta) dirCta.setAttribute('href', lang === 'zh' ? '#flow' : '#kontakt');
+}
+document.querySelectorAll('.lang button').forEach(b =>
+  b.addEventListener('click', () => setLang(b.dataset.setlang)));
+window.setLang = setLang;
+const __q = new URLSearchParams(location.search).get('lang'); if (__q) setLang(__q);
+
+/* 登录分流下拉 */
+const login = document.getElementById('login');
+login.querySelector('button').addEventListener('click', e => {
+  e.stopPropagation();
+  login.dataset.open = login.dataset.open === 'true' ? 'false' : 'true';
+});
+document.addEventListener('click', () => login.dataset.open = 'false');
+document.addEventListener('keydown', e => { if (e.key === 'Escape') login.dataset.open = 'false'; });
+</script>
 </body>
 </html>
